@@ -1,0 +1,8 @@
+desc
+3 = readfile ../lab2Cpp/work/secondInput.txt
+1 = grep third
+2 = replace third THIRD
+5 = sort
+6 = replace file FILE!!!
+7 = writefile ../lab2Cpp/work/seventhOutput.txt
+csed

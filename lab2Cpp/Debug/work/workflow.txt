@@ -1,0 +1,7 @@
+desc
+2 = sort
+5 = dump work/dump.txt
+6 = replace abcd dcba
+7 = grep sdkfm
+csed
+2 -> 5 -> 6

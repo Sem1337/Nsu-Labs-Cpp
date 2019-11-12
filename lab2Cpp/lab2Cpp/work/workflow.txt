@@ -1,0 +1,14 @@
+desc
+3 = readfile work/secondInput.txt
+1 = grep third
+2 = replace third THIRD
+5 = sort
+6 = replace file FILE!!!
+7 = writefile work/secondOutput.txt
+10 = readfile work/firstInput.txt
+11 = replace line !LINE!
+12 = sort
+13 = grep another
+14 = writefile work/firstOutput.txt
+csed
+10 -> 11 -> 12 -> 13 -> 14 -> 3 -> 1 -> 2 -> 5 -> 6 -> 7

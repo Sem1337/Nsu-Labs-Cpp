@@ -1,0 +1,3 @@
+third line of first test file
+another third line of first test file
+another third line of first test file

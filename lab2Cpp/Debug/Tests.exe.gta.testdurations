@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>C:\Users\semen\Documents\Visual Studio 2015\lab2Cpp\Debug\Tests.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="TestCaseName.TestName" Duration="5" />
+    <TestDuration Test="TestFirstScheme.FirstScheme" Duration="5" />
+    <TestDuration Test="TestSecondScheme.SecondScheme" Duration="1" />
+    <TestDuration Test="TestThirdScheme.ThirdScheme" Duration="1" />
+    <TestDuration Test="TestSecondScheme.ValidationEx" Duration="1" />
+    <TestDuration Test="TestThirdScheme.ValidationEx" Duration="1" />
+    <TestDuration Test="TestFourthScheme.ExecutionEx" Duration="1" />
+    <TestDuration Test="TestFifthScheme.ValidationEx" Duration="1" />
+    <TestDuration Test="TestFirstScheme.FirstCorrectScheme" Duration="5" />
+    <TestDuration Test="TestSecondScheme.MoreThanOneDefinitions" Duration="1" />
+    <TestDuration Test="TestThirdScheme.IncorrectIdInSequence" Duration="1" />
+    <TestDuration Test="TestFourthScheme.IncorrectOrder" Duration="1" />
+    <TestDuration Test="TestFifthScheme.ExcessArgument" Duration="1" />
+    <TestDuration Test="TestSixthScheme.WrongFileName" Duration="1" />
+    <TestDuration Test="TestSeventhScheme.SecondCorrectScheme" Duration="1" />
+    <TestDuration Test="TestEighthScheme.ThirdCorrectScheme" Duration="5" />
+  </TestDurations>
+</GtaTestDurations>
