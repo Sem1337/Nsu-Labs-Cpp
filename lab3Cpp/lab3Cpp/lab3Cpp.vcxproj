@@ -123,9 +123,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConsoleGamer.cpp" />
+    <ClCompile Include="ConsoleView.cpp" />
+    <ClCompile Include="Gamer.cpp" />
+    <ClCompile Include="GameView.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConsoleGamer.h" />
+    <ClInclude Include="ConsoleView.h" />
+    <ClInclude Include="Gamer.h" />
+    <ClInclude Include="GameView.h" />
     <ClInclude Include="optionparser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

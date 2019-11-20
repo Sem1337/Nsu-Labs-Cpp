@@ -9,7 +9,7 @@ const option::Descriptor usage[] =
  {UNKNOWN, 0, "", "",option::Arg::None, "USAGE: example [options]\n\n"
 										"Options:" },
  {HELP, 0,"h", "help",option::Arg::None, "--help, -h  \tPrint usage and exit." },
- {COUNT, 0,"c","count",option::Arg::Optional, "--count, -c  \tIncrement count." },
+ {COUNT, 0,"c","count",option::Arg::Optional, "--count, -c  \tSet count of rounds." },
  {FIRST, 0, "f", "first",option::Arg::Optional, "--first, -f \tSet first player type."},
  {SECOND, 0, "s", "second",option::Arg::Optional, "--second, -s \tSet second player type."},
 };
