@@ -1,22 +1,32 @@
 #pragma once
 #include "GameView.h"
+#include <iostream>
 class ConsoleView :
 	public GameView
 {
 public:
 
 	ConsoleView();
+	ConsoleView(int w, int h,int l,int t,char backgroundSym = ' ',std::shared_ptr<ConsoleView> superView = nullptr);
 	~ConsoleView();
-	virtual void show();
+	virtual void show() override;
 	virtual void addSubview(std::shared_ptr<GameView>) override;
-
+	virtual void remove() override;
+	virtual std::list<std::shared_ptr<GameView>>& getSubviews() override;
+	virtual void setLeftAnchor(int) override;
+	virtual void setTopAnchor(int) override;
+	void resize(int width, int height) override;
+	const std::vector<std::vector<char>>& getContent() const;
 private:
-	
+
+	std::vector<std::vector<char>>content;
 	std::vector<std::vector<char>>background;
 	std::list<std::shared_ptr<GameView>>subViews;
+	std::shared_ptr<ConsoleView> superView;
 
 	int width = 30;
 	int height = 30;
+	//in superview coordinates
 	int leftAnchor = 0;
 	int topAnchor = 0;
 

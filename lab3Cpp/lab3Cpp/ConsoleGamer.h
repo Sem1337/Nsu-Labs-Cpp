@@ -1,12 +1,13 @@
 #pragma once
-#include "GameView.h"
+#include "Gamer.h"
 class ConsoleGamer :
-	public GameView
+	public Gamer
 {
 public:
 	ConsoleGamer();
 	~ConsoleGamer();
-
+	virtual std::string shoot() override;
+	virtual std::string placeShip() override;
 private:
 
 };

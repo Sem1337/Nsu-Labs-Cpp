@@ -123,18 +123,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConsoleGamePresenter.cpp" />
     <ClCompile Include="ConsoleGamer.cpp" />
     <ClCompile Include="ConsoleView.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GamePresenter.cpp" />
     <ClCompile Include="Gamer.cpp" />
     <ClCompile Include="GameView.cpp" />
+    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Shot.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConsoleGamePresenter.h" />
     <ClInclude Include="ConsoleGamer.h" />
     <ClInclude Include="ConsoleView.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GamePresenter.h" />
     <ClInclude Include="Gamer.h" />
     <ClInclude Include="GameView.h" />
     <ClInclude Include="optionparser.h" />
+    <ClInclude Include="Parser.h" />
+    <ClInclude Include="Ship.h" />
+    <ClInclude Include="Shot.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
