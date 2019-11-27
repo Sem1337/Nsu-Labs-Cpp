@@ -24,12 +24,12 @@ Ship::~Ship()
 
 int Ship::getWidth() const
 {
-	return std::min(abs(firstSide.first - secondSide.first), abs(firstSide.second - secondSide.second));
+	return std::min(abs(firstSide.first - secondSide.first), abs(firstSide.second - secondSide.second)) + 1;
 }
 
 int Ship::getLength() const
 {
-	return std::max(abs(firstSide.first - secondSide.first), abs(firstSide.second - secondSide.second));
+	return std::max(abs(firstSide.first - secondSide.first), abs(firstSide.second - secondSide.second)) + 1;
 }
 
 std::pair<int, int> Ship::getFirstSide() const

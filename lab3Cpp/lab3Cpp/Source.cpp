@@ -3,6 +3,7 @@
 #include <vector>
 #include "ConsoleView.h"
 #include "optionparser.h"
+#include "Game.h"
 
 
 struct Arg : public option::Arg
@@ -73,7 +74,7 @@ int main(int argc, char* argv[])
 	int gamerType1 = options[FIRST].arg == 0 ? 2 : atoi(options[FIRST].arg);
 	int gamerType2 = options[SECOND].arg == 0 ? 2 : atoi(options[SECOND].arg);
 
-	std::cout << roundCount << " " << gamerType1 << " " << gamerType2 << std::endl;
+	/*std::cout << roundCount << " " << gamerType1 << " " << gamerType2 << std::endl;
 
 	std::shared_ptr<ConsoleView>mainView = std::make_shared<ConsoleView>(50, 30, 0, 0, '*');
 	std::shared_ptr<ConsoleView>subView(std::make_shared<ConsoleView>(20, 10, 10, 10, ' ', mainView));
@@ -83,7 +84,8 @@ int main(int argc, char* argv[])
 	//subView2->remove();
 	mainView->show();
 	//subView->show();
-
+	*/
 	
-
+	Game game(roundCount, gamerType1, gamerType2, PresenterType::ConsolePresent);
+	game.run();
 }

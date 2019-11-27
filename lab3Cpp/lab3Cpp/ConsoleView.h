@@ -7,7 +7,7 @@ class ConsoleView :
 public:
 
 	ConsoleView();
-	ConsoleView(int w, int h,int l,int t,char backgroundSym = ' ',std::shared_ptr<ConsoleView> superView = nullptr);
+	ConsoleView(int w, int h,int l,int t,char backgroundSym = ' ',std::shared_ptr<GameView> superView = nullptr);
 	~ConsoleView();
 	virtual void show() override;
 	virtual void addSubview(std::shared_ptr<GameView>) override;
@@ -17,12 +17,14 @@ public:
 	virtual void setTopAnchor(int) override;
 	void resize(int width, int height) override;
 	const std::vector<std::vector<char>>& getContent() const;
+
+
 private:
 
 	std::vector<std::vector<char>>content;
 	std::vector<std::vector<char>>background;
 	std::list<std::shared_ptr<GameView>>subViews;
-	std::shared_ptr<ConsoleView> superView;
+	std::shared_ptr<GameView> superView;
 
 	int width = 30;
 	int height = 30;

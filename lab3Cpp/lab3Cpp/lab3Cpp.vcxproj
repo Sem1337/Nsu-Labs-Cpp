@@ -123,7 +123,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ConsoleGamePresenter.cpp" />
     <ClCompile Include="ConsoleGamer.cpp" />
     <ClCompile Include="ConsoleView.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -136,7 +135,6 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConsoleGamePresenter.h" />
     <ClInclude Include="ConsoleGamer.h" />
     <ClInclude Include="ConsoleView.h" />
     <ClInclude Include="Game.h" />

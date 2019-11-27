@@ -22,8 +22,6 @@ public:
 	virtual void setLeftAnchor(int) = 0;
 	virtual void setTopAnchor(int) = 0;
 
-
 private:
-	
 };
 

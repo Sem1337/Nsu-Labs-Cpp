@@ -6,7 +6,7 @@ ConsoleView::ConsoleView(): superView(nullptr)
 	background.assign(height, std::vector<char>(width, ' '));
 }
 
-ConsoleView::ConsoleView(int width, int height, int leftAnchor,int topAnchor,char backgroundSym, std::shared_ptr<ConsoleView> superView)
+ConsoleView::ConsoleView(int width, int height, int leftAnchor,int topAnchor,char backgroundSym, std::shared_ptr<GameView> superView)
 	: width(width), height(height), topAnchor(topAnchor),leftAnchor(leftAnchor), superView(superView)
 {
 	content.assign(height, std::vector<char>(width));
@@ -84,6 +84,7 @@ const std::vector<std::vector<char>>& ConsoleView::getContent() const
 {
 	return content;
 }
+
 
 void ConsoleView::resize(int width, int height)
 {

@@ -42,9 +42,6 @@
     <ClCompile Include="GamePresenter.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="ConsoleGamePresenter.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Shot.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -75,9 +72,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="GamePresenter.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleGamePresenter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Shot.h">
