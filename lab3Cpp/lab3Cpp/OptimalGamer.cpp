@@ -71,6 +71,11 @@ void OptimalGamer::setLastSuccessfulShot(Shot shot)
 	}
 }
 
+bool OptimalGamer::ready()
+{
+	return true;
+}
+
 
 
 void OptimalGamer::reset()

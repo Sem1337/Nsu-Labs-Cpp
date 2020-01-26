@@ -16,6 +16,10 @@ Ship Parser::parseShip(std::string ship)
 	std::pair<int, int>firstSide;
 	std::pair<int, int>secondSide;
 	std::vector<std::string>tokenized = tokenize(ship);
+	if (tokenized.size() == 2) {
+		tokenized.push_back(tokenized[0]);
+		tokenized.push_back(tokenized[1]);
+	}
 	if (tokenized.size() != 4 || tokenized[0].size() != 1 || tokenized[2].size() != 1)throw std::exception("incorrect ship format");
 	firstSide = { tokenized[0][0] - 'a' + 1,atoi(tokenized[1].c_str()) };
 	secondSide = { tokenized[2][0] - 'a' + 1, atoi(tokenized[3].c_str()) };

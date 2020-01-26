@@ -5,7 +5,6 @@
 #include "optionparser.h"
 #include "Game.h"
 
-
 struct Arg : public option::Arg
 {
 	static void printError(const char* msg1, const option::Option& opt, const char* msg2)
@@ -56,7 +55,7 @@ const option::Descriptor usage[] =
 
 int main(int argc, char* argv[])
 {
-	argc -= (argc > 0); argv += (argc > 0); // skip program name argv[0] if present
+	argc -= (argc > 0); argv += (argc > 0);
 	option::Stats  stats(usage, argc, argv);
 	std::vector<option::Option> options(stats.options_max);
 	std::vector<option::Option> buffer(stats.buffer_max);
@@ -70,22 +69,11 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	int roundCount = options[COUNT].arg == 0 ? 1 : atoi(options[COUNT].arg);
+	int roundCount = options[COUNT].arg == 0 ? 2 : atoi(options[COUNT].arg);
 	int gamerType1 = options[FIRST].arg == 0 ? 2 : atoi(options[FIRST].arg);
-	int gamerType2 = options[SECOND].arg == 0 ? 2 : atoi(options[SECOND].arg);
-
-	/*std::cout << roundCount << " " << gamerType1 << " " << gamerType2 << std::endl;
-
-	std::shared_ptr<ConsoleView>mainView = std::make_shared<ConsoleView>(50, 30, 0, 0, '*');
-	std::shared_ptr<ConsoleView>subView(std::make_shared<ConsoleView>(20, 10, 10, 10, ' ', mainView));
-	std::shared_ptr<ConsoleView>subView2(std::make_shared<ConsoleView>(5, 5, 3, 3, '=',subView));
-	mainView->addSubview(subView);
-	subView->addSubview(subView2);
-	//subView2->remove();
-	mainView->show();
-	//subView->show();
-	*/
+	int gamerType2 = options[SECOND].arg == 0 ? 3 : atoi(options[SECOND].arg);
 	
 	Game game(roundCount, gamerType1, gamerType2, PresenterType::ConsolePresent);
 	game.run();
+
 }

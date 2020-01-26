@@ -85,7 +85,6 @@ void RandomGamer::putVertically(int size)
 
 std::string RandomGamer::shoot()
 {
-	//Sleep(10);
 	return shotsOrder[currentShot++];
 }
 
@@ -96,6 +95,12 @@ std::string RandomGamer::placeShip()
 
 void RandomGamer::setLastSuccessfulShot(Shot shot)
 {
+	return;
+}
+
+bool RandomGamer::ready()
+{
+	return true;
 }
 
 void RandomGamer::reset()

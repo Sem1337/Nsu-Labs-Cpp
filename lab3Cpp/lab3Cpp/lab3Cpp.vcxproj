@@ -18,6 +18,37 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ConsoleGamer.h" />
+    <ClInclude Include="ConsoleView.h" />
+    <ClInclude Include="ConsoleViewConstants.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GamePresenter.h" />
+    <ClInclude Include="Gamer.h" />
+    <ClInclude Include="GameView.h" />
+    <ClInclude Include="GraphicView.h" />
+    <ClInclude Include="OptimalGamer.h" />
+    <ClInclude Include="optionparser.h" />
+    <ClInclude Include="Parser.h" />
+    <ClInclude Include="RandomGamer.h" />
+    <ClInclude Include="Ship.h" />
+    <ClInclude Include="Shot.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ConsoleGamer.cpp" />
+    <ClCompile Include="ConsoleView.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GamePresenter.cpp" />
+    <ClCompile Include="Gamer.cpp" />
+    <ClCompile Include="GameView.cpp" />
+    <ClCompile Include="GraphicView.cpp" />
+    <ClCompile Include="OptimalGamer.cpp" />
+    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="RandomGamer.cpp" />
+    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Shot.cpp" />
+    <ClCompile Include="Source.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{1D75E957-A139-4077-B802-5D4BD5598B88}</ProjectGuid>
@@ -76,9 +107,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\semen\Documents\Visual Studio 2015\Libs\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>C:\Users\semen\Documents\Visual Studio 2015\Libs\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -100,11 +134,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\semen\Documents\Visual Studio 2015\Libs\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Users\semen\Documents\Visual Studio 2015\Libs\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,30 +159,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="ConsoleGamer.cpp" />
-    <ClCompile Include="ConsoleView.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GamePresenter.cpp" />
-    <ClCompile Include="Gamer.cpp" />
-    <ClCompile Include="GameView.cpp" />
-    <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="Ship.cpp" />
-    <ClCompile Include="Shot.cpp" />
-    <ClCompile Include="Source.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ConsoleGamer.h" />
-    <ClInclude Include="ConsoleView.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GamePresenter.h" />
-    <ClInclude Include="Gamer.h" />
-    <ClInclude Include="GameView.h" />
-    <ClInclude Include="optionparser.h" />
-    <ClInclude Include="Parser.h" />
-    <ClInclude Include="Ship.h" />
-    <ClInclude Include="Shot.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

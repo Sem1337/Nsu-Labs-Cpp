@@ -2,19 +2,23 @@
 
 Game::Game(int roundsCount, int gamerType1, int gamerType2, PresenterType presenterType) : roundsCount(roundsCount)
 {
-
-	presenter = std::make_unique<GamePresenter>(35, 35, presenterType);
+	srand((unsigned int)std::chrono::steady_clock::now().time_since_epoch().count());
+	presenter = std::make_unique<GamePresenter>(WINDOW_WIDTH, WINDOW_HEIGHT, presenterType);
 
 	switch (gamerType1)
 	{
-	case 1: gamer1 = std::make_unique<ConsoleGamer>();
+	case 1: gamer1 = std::make_unique<ConsoleGamer>(); break;
+	case 2: gamer1 = std::make_unique<RandomGamer>(); break;
+	case 3: gamer1 = std::make_unique<OptimalGamer>(); break;
 	default:
 		gamer1 = std::make_unique<ConsoleGamer>();
 	}
 
 	switch (gamerType2)
 	{
-	case 1: gamer2 = std::make_unique<ConsoleGamer>();
+	case 1: gamer2 = std::make_unique<ConsoleGamer>(); break;
+	case 2: gamer2 = std::make_unique<RandomGamer>(); break;
+	case 3: gamer2 = std::make_unique<OptimalGamer>(); break;
 	default:
 		gamer2 = std::make_unique<ConsoleGamer>();
 	}
@@ -32,20 +36,17 @@ void Game::run()
 
 		int turn = 0;
 		while (true) {
-			presenter->showGameFrame(ships1, ships2, shots1, shots2);
+			presenter->showGameFrame(ships1, ships2, shots1, shots2,lastShot1,lastShot2);
+			
+			int winner = checkWinner();
+			if (winner)break;
+
 			askShot(turn);
 
-			int winner = checkWinner();
-			if (winner == 1) {
-				break;
-			}
-			else if (winner == 2) {
-				break;
-			}
-			turn ^= 1;
+		
 		}
 
-		endRound();
+		if (!endRound())break;
 	}
 }
 
@@ -60,16 +61,19 @@ void Game::setup()
 
 void Game::askShips(int turn)
 {
-	Gamer& gamer = (turn == 0 ? *gamer1.get() : *gamer2.get());
+	Gamer& gamer = (turn == 0 ? *gamer1 : *gamer2);
 	std::vector<Ship>& ships = (turn == 0 ? ships1 : ships2);
 
-	for (int count = 1; count <= 1; count++) {
+	for (int count = 1; count <= 4; count++) {
 		for (int placed = 0; placed < count; ) {
 			std::cout << "place " << 5 - count << " size ship\n"; // change to presenter::askShipPosition()
 			try {
 				Ship newShip = Parser::parseShip(gamer.placeShip());
-				if (newShip.getWidth() != 1 || newShip.getLength() != 5 - count) {
+				if (newShip.getLength() != 5 - count) {
 					throw std::exception("incorrect ship size");
+				}
+				for (auto ship : ships) {
+					if (ship.intersect(newShip))throw std::exception("ships intersection");
 				}
 				ships.push_back(newShip);
 				placed++;
@@ -81,16 +85,26 @@ void Game::askShips(int turn)
 	}
 }
 
-void Game::askShot(int turn)
+void Game::askShot(int &turn)
 {
 	int correctShoot = 0;
-	Gamer& gamer = (turn == 0 ? *gamer1.get() : *gamer2.get());
-	std::vector<Shot>& shots = (turn == 0 ? shots1 : shots2);
+	Gamer& gamer = (turn == 0 ? *gamer1 : *gamer2);
+	std::set<Shot>& shots = (turn == 0 ? shots1 : shots2);
 	while (!correctShoot) {
 		try {
 			std::pair<int, int> cell = Parser::parseShot(gamer.shoot());
 			correctShoot = 1;
-			shots.push_back(handleCell(cell, turn));
+			Shot newShot = handleCell(cell, turn);
+			if (turn == 0) {
+				lastShot1 = std::make_shared<Shot>(newShot);
+			}
+			else {
+				lastShot2 = std::make_shared<Shot>(newShot);
+			}
+			if (newShot.getType() == ShotStatus::Miss)turn ^= 1;
+			shots.insert(newShot);
+			
+			gamer.setLastSuccessfulShot(newShot);
 		}
 		catch (const std::exception & e) {
 			std::cout << e.what() << std::endl;
@@ -100,26 +114,38 @@ void Game::askShot(int turn)
 
 Shot Game::handleCell(std::pair<int, int> cell, int turn)
 {
+	std::set<Shot>& shots = (turn == 0) ? shots1 : shots2;
 	std::vector<Ship>& ships = (turn == 0 ? ships2 : ships1);
 	for (auto& ship : ships) {
 		for (int col = ship.getFirstSide().first; col <= ship.getSecondSide().first; col++) {
 			for (int row = ship.getFirstSide().second; row <= ship.getSecondSide().second; row++) {
 				if (cell == std::make_pair(col, row)) {
-					ship.hit();
-					return Shot(cell.first, cell.second, 1);
+					Shot newShot = Shot(cell.first, cell.second, ShotStatus::Hit);
+					if (shots.find(newShot) == shots.end()) {
+						ship.hit();
+						if (ship.getHP() == 0) {
+							newShot.setType(ShotStatus::Destroy);
+						}
+					}
+					return newShot;
 				}
 			}
 		}
 	}
-	return Shot(cell.first, cell.second, 0);
+	return Shot(cell.first, cell.second, ShotStatus::Miss);
 }
 
-void Game::endRound()
+bool Game::endRound()
 {
 	ships1.clear();
 	ships2.clear();
 	shots1.clear();
 	shots2.clear();
+	lastShot1 = nullptr;
+	lastShot2 = nullptr;
+	gamer1->reset();
+	gamer2->reset();
+	return gamer1->ready() && gamer2->ready();
 }
 
 int Game::checkWinner()
@@ -128,11 +154,17 @@ int Game::checkWinner()
 	for (auto ship : ships1) {
 		if (ship.getHP() > 0)alive = 1;
 	}
-	if (!alive)return 2;
+	if (!alive) {
+		std::cout << "Gamer 2 win\n";
+		return 2;
+	}
 	alive = 0;
 	for (auto ship : ships2) {
 		if (ship.getHP() > 0)alive = 1;
 	}
-	if (!alive)return 1;
+	if (!alive) {
+		std::cout << "Gamer 1 win\n";
+		return 1;
+	}
 	return 0;
 }

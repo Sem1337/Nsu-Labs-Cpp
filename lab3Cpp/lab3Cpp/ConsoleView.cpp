@@ -1,16 +1,23 @@
 #include "ConsoleView.h"
 
-ConsoleView::ConsoleView(): superView(nullptr)
+ConsoleView::ConsoleView(): superView(std::weak_ptr<GameView>())
 {
 	content.assign(height, std::vector<char>(width));
 	background.assign(height, std::vector<char>(width, ' '));
 }
 
-ConsoleView::ConsoleView(int width, int height, int leftAnchor,int topAnchor,char backgroundSym, std::shared_ptr<GameView> superView)
-	: width(width), height(height), topAnchor(topAnchor),leftAnchor(leftAnchor), superView(superView)
+ConsoleView::ConsoleView(int width, int height, int leftAnchor,int topAnchor,char backgroundSym, std::string text)
+	: width(width), height(height), topAnchor(topAnchor),leftAnchor(leftAnchor), superView(std::weak_ptr<GameView>())
 {
 	content.assign(height, std::vector<char>(width));
 	background.assign(height, std::vector<char>(width, backgroundSym));
+	
+	int labelChar = 0;
+	for (int row = 0; row < height && labelChar < int(text.length()); row++) {
+		for (int col = 0; col < width && labelChar < int(text.length()); col++, labelChar++) {
+			background[row][col] = text[labelChar];
+		}
+	}
 }
 
 
@@ -38,7 +45,7 @@ void ConsoleView::show()
 			}
 		}
 	}
-	if (superView == nullptr) {
+	if (superView.lock() == nullptr) {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				std::cout << content[i][j];
@@ -50,18 +57,25 @@ void ConsoleView::show()
 
 void ConsoleView::addSubview(std::shared_ptr<GameView> subView)
 {
-
+	subView->removeFromSuperView();
 	subViews.push_back(subView);
+	subView->setSuperView(shared_from_this());
 }
 
-void ConsoleView::remove()
+void ConsoleView::removeFromSuperView()
 {
-	for (auto view : superView.get()->getSubviews()) {
+	if (superView.lock() == nullptr)return;
+	for (auto view : superView.lock()->getSubviews()) {
 		if (view.get() == this) {
-			superView.get()->getSubviews().remove(view);
+			superView.lock()->getSubviews().remove(view);
 			return;
 		}
 	}
+}
+
+void ConsoleView::setSuperView(std::shared_ptr<GameView> superView)
+{
+	this->superView = superView;
 }
 
 std::list<std::shared_ptr<GameView>>& ConsoleView::getSubviews()

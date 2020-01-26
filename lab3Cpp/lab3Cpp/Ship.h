@@ -7,10 +7,10 @@ public:
 	Ship(const Ship&);
 	Ship(std::pair<int, int>, std::pair<int, int>);
 	~Ship();
-	int getWidth() const;
 	int getLength() const;
 	std::pair<int, int> getFirstSide() const;
 	std::pair<int, int> getSecondSide() const;
+	bool intersect(Ship);
 	int getHP() const;
 	void hit();
 private:
